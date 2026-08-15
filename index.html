@@ -17,7 +17,8 @@
             --text-main: #f8fafc;
             --text-muted: #64748b;
             --accent: #38bdf8;          
-            --accent-glow: rgba(56, 189, 248, 0.3);
+            --accent-glow: rgba(56, 189, 248, 0.35);
+            --warning-amber: #f59e0b;
             
             /* High-End Transition Easing Curve */
             --cb-fluid: cubic-bezier(0.16, 1, 0.3, 1);
@@ -44,7 +45,7 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* Subtle Dynamic Coding Canvas Background */
+        /* Dynamic Coding Canvas Background */
         #code-bg {
             position: fixed;
             top: 0;
@@ -144,7 +145,7 @@
             width: 100%;
         }
 
-        /* Clean Flat Link Card */
+        /* Link Card with Subtle Edge Glow */
         .link-card {
             background-color: var(--card-bg);
             border-radius: 20px;
@@ -156,10 +157,16 @@
             justify-content: space-between;
             position: relative;
             backdrop-filter: blur(12px);
+            
+            /* Luminous Soft Edge Glow Halo */
+            box-shadow: 
+                0 0 16px rgba(56, 189, 248, 0.12),
+                0 10px 25px rgba(0, 0, 0, 0.4);
+                
             transition: transform 0.4s var(--cb-fluid), box-shadow 0.4s var(--cb-fluid);
         }
 
-        /* Flowing Cyan Edge Glow */
+        /* Flowing Luminous Edge Line */
         .link-card::before {
             content: '';
             position: absolute;
@@ -167,9 +174,9 @@
             border-radius: 20px;
             padding: 1.5px;
             background: linear-gradient(135deg, 
-                rgba(56, 189, 248, 0.25) 0%, 
-                rgba(20, 28, 47, 0.8) 50%, 
-                rgba(56, 189, 248, 0.25) 100%
+                rgba(56, 189, 248, 0.45) 0%, 
+                rgba(56, 189, 248, 0.05) 50%, 
+                rgba(56, 189, 248, 0.45) 100%
             );
             background-size: 200% 200%;
             -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
@@ -178,21 +185,24 @@
             pointer-events: none;
             animation: fluidEdge 16s linear infinite; 
             transition: opacity 0.4s var(--cb-fluid);
-            opacity: 0.5;
+            opacity: 0.65;
         }
 
         .link-card:hover {
             transform: translateY(-4px);
-            box-shadow: 0 0 20px rgba(56, 189, 248, 0.15);
+            /* Intensified Radiant Edge Glow on Hover */
+            box-shadow: 
+                0 0 28px rgba(56, 189, 248, 0.28),
+                0 16px 35px rgba(0, 0, 0, 0.6);
         }
 
         .link-card:hover::before {
             opacity: 1;
             animation-duration: 8s;
             background: linear-gradient(135deg, 
-                rgba(56, 189, 248, 0.5) 0%, 
-                rgba(20, 28, 47, 0.8) 50%, 
-                rgba(56, 189, 248, 0.5) 100%
+                rgba(56, 189, 248, 0.7) 0%, 
+                rgba(56, 189, 248, 0.15) 50%, 
+                rgba(56, 189, 248, 0.7) 100%
             );
             background-size: 200% 200%;
         }
@@ -246,6 +256,26 @@
             box-shadow: 0 0 8px var(--accent);
         }
 
+        /* Pulsing Signal Loading State */
+        .card-status.loading-signal {
+            color: var(--warning-amber);
+        }
+
+        .card-status.loading-signal::before {
+            background-color: var(--warning-amber);
+            box-shadow: 0 0 8px var(--warning-amber);
+            animation: pulseSignal 1.2s infinite ease-in-out;
+        }
+
+        .link-card:hover .card-status.loading-signal {
+            color: #fbbf24;
+        }
+
+        .link-card:hover .card-status.loading-signal::before {
+            background-color: #fbbf24;
+            box-shadow: 0 0 10px #fbbf24;
+        }
+
         .card-title {
             font-size: 1.15rem;
             font-weight: 700;
@@ -277,7 +307,7 @@
         .link-card:hover .card-action-node {
             color: var(--accent);
             transform: scale(1.08);
-            box-shadow: 0 0 12px rgba(56, 189, 248, 0.25);
+            box-shadow: 0 0 12px rgba(56, 189, 248, 0.35);
         }
 
         .card-action-node span {
@@ -288,11 +318,22 @@
             transform: translateX(2px);
         }
 
-        /* Border Animation */
+        /* Keyframe Animations */
         @keyframes fluidEdge {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 150%; }
             100% { background-position: 0% 50%; }
+        }
+
+        @keyframes pulseSignal {
+            0%, 100% {
+                opacity: 0.3;
+                transform: scale(0.8);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.3);
+            }
         }
 
         footer {
@@ -315,7 +356,7 @@
         <!-- Header Profile HUD -->
         <header>
             <div class="avatar-container">
-                <img src="IMG_3771.jpeg" alt="Gabriel Vasquez" class="avatar">
+                <img src="profile.png" alt="Gabriel Vasquez" class="avatar">
             </div>
             <span class="eyebrow">Gabriel Vasquez</span>
             <h1>Selected Works</h1>
@@ -325,7 +366,7 @@
         <!-- Main Link Stack -->
         <main class="link-stack">
             <!-- Link Module 01 -->
-            <a href="https://matterr99.github.io/Tennis-portfolio/index.html" class="link-card" target="_blank">
+            <a href="https://99matterr.github.io/Tennis-portfolio/index.html" class="link-card" target="_blank">
                 <div class="card-main">
                     <div class="card-meta">
                         <span>[ 01 ]</span>
@@ -340,11 +381,11 @@
             </a>
 
             <!-- Link Module 02 -->
-            <a href="https://matterr99.github.io/Macro-trading-hub/index.html" class="link-card" target="_blank">
+            <a href="https://99matterr.github.io/Macro-trading-hub/" class="link-card" target="_blank">
                 <div class="card-main">
                     <div class="card-meta">
                         <span>[ 02 ]</span>
-                        <span class="card-status">TERMINAL COCKPIT</span>
+                        <span class="card-status loading-signal">DEVELOPMENT IN PROGRESS</span>
                     </div>
                     <div class="card-title">Kairos Global Research</div>
                     <div class="card-desc">Cross-asset liquidity tracking and institutional macro terminal.</div>
@@ -355,11 +396,11 @@
             </a>
 
             <!-- Link Module 03 -->
-            <a href="" class="link-card" target="_blank">
+            <a href="https://99matterr.github.io/web-development-projects/" class="link-card" target="_blank">
                 <div class="card-main">
                     <div class="card-meta">
                         <span>[ 03 ]</span>
-                        <span class="card-status">CORE REPOSITORY</span>
+                        <span class="card-status loading-signal">UNDER DEVELOPMENT</span>
                     </div>
                     <div class="card-title">Web Development</div>
                     <div class="card-desc">Showcase of clean UI/UX architectures, scripts, and web apps.</div>
