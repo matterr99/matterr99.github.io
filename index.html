@@ -1,492 +1,359 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gabriel Vasquez | Link In Bio</title>
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gabriel Vasquez | Link In Bio</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS & Lucide Icons -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            'deep-slate': '#0d1321',
+            'card-slate': '#141c2f',
+            'accent-cyan': '#38bdf8',
+            'amber-status': '#f59e0b',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Hide scrollbars while retaining full snap functionality */
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     
-    <style>
-        :root {
-            /* High-Fidelity Deep Slate Palette */
-            --bg-color: #0d1321;
-            --card-bg: #141c2f;
-            --text-main: #f8fafc;
-            --text-muted: #64748b;
-            --accent: #38bdf8;          
-            --accent-glow: rgba(56, 189, 248, 0.35);
-            --warning-amber: #f59e0b;
-            
-            /* High-End Transition Easing Curve */
-            --cb-fluid: cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
-            background: radial-gradient(circle at 50% -10%, #1e293b 0%, var(--bg-color) 70%);
-            color: var(--text-main);
-            line-height: 1.6;
-            padding: 3rem 1.25rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            position: relative;
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        /* Dynamic Coding Canvas Background */
-        #code-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: 0;
-            pointer-events: none;
-            opacity: 0.22;
-        }
-
-        .profile-wrapper {
-            width: 100%;
-            max-width: 580px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* Profile HUD Header */
-        header {
-            text-align: center;
-            margin-bottom: 3rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        /* Profile Avatar Badge with Edge Glow */
-        .avatar-container {
-            position: relative;
-            width: 104px;
-            height: 104px;
-            border-radius: 50%;
-            background: var(--card-bg);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1.5rem;
-            
-            /* Radiant Edge Glow Halo */
-            box-shadow: 
-                0 0 24px rgba(56, 189, 248, 0.28),
-                0 10px 25px rgba(0, 0, 0, 0.5);
-            
-            transition: box-shadow 0.4s var(--cb-fluid), transform 0.4s var(--cb-fluid);
-        }
-
-        .avatar-container:hover {
-            transform: scale(1.03);
-            box-shadow: 
-                0 0 36px rgba(56, 189, 248, 0.45),
-                0 12px 30px rgba(0, 0, 0, 0.6);
-        }
-
-        /* Animated Glowing Edge Ring */
-        .avatar-container::before {
-            content: '';
-            position: absolute;
-            inset: -2px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, 
-                rgba(56, 189, 248, 0.75) 0%, 
-                rgba(56, 189, 248, 0.1) 50%, 
-                rgba(56, 189, 248, 0.75) 100%
-            );
-            background-size: 200% 200%;
-            opacity: 0.85;
-            z-index: 0;
-            animation: fluidEdge 12s linear infinite;
-            filter: drop-shadow(0 0 6px rgba(56, 189, 248, 0.4));
-        }
-
-        .avatar {
-            width: 96px;
-            height: 96px;
-            border-radius: 50%;
-            background-color: #1a243a;
-            position: relative;
-            z-index: 1;
-            object-fit: cover;
-        }
-
-        .eyebrow {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.3em;
-            color: var(--accent);
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 700;
-            text-shadow: 0 0 10px var(--accent-glow);
-        }
-
-        header h1 {
-            font-size: 2.25rem;
-            font-weight: 800;
-            letter-spacing: -0.03em;
-            margin-bottom: 0.75rem;
-            color: var(--text-main);
-        }
-
-        header p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            font-weight: 400;
-            max-width: 440px;
-        }
-
-        /* Stacked Link List Container */
-        .link-stack {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-            width: 100%;
-        }
-
-        /* Link Card with Edge Glow */
-        .link-card {
-            background-color: var(--card-bg);
-            border-radius: 20px;
-            padding: 1.5rem 1.75rem;
-            text-decoration: none;
-            color: inherit;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            position: relative;
-            backdrop-filter: blur(12px);
-            
-            /* Luminous Soft Edge Glow Halo */
-            box-shadow: 
-                0 0 16px rgba(56, 189, 248, 0.12),
-                0 10px 25px rgba(0, 0, 0, 0.4);
-                
-            transition: transform 0.4s var(--cb-fluid), box-shadow 0.4s var(--cb-fluid);
-        }
-
-        /* Flowing Luminous Edge Line */
-        .link-card::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: 20px;
-            padding: 1.5px;
-            background: linear-gradient(135deg, 
-                rgba(56, 189, 248, 0.45) 0%, 
-                rgba(56, 189, 248, 0.05) 50%, 
-                rgba(56, 189, 248, 0.45) 100%
-            );
-            background-size: 200% 200%;
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            pointer-events: none;
-            animation: fluidEdge 16s linear infinite; 
-            transition: opacity 0.4s var(--cb-fluid);
-            opacity: 0.65;
-        }
-
-        .link-card:hover {
-            transform: translateY(-4px);
-            /* Intensified Radiant Edge Glow on Hover */
-            box-shadow: 
-                0 0 28px rgba(56, 189, 248, 0.28),
-                0 16px 35px rgba(0, 0, 0, 0.6);
-        }
-
-        .link-card:hover::before {
-            opacity: 1;
-            animation-duration: 8s;
-            background: linear-gradient(135deg, 
-                rgba(56, 189, 248, 0.7) 0%, 
-                rgba(56, 189, 248, 0.15) 50%, 
-                rgba(56, 189, 248, 0.7) 100%
-            );
-            background-size: 200% 200%;
-        }
-
-        .link-card:active {
-            transform: translateY(-1px);
-        }
-
-        /* Card Content Layout */
-        .card-main {
-            display: flex;
-            flex-direction: column;
-            gap: 0.35rem;
-            padding-right: 1rem;
-        }
-
-        .card-meta {
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.7rem;
-            font-weight: 500;
-            color: var(--text-muted);
-            letter-spacing: 0.05em;
-        }
-
-        .card-status {
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-            transition: color 0.3s var(--cb-fluid);
-        }
-
-        .link-card:hover .card-status {
-            color: var(--accent);
-        }
-
-        .card-status::before {
-            content: '';
-            display: inline-block;
-            width: 5px;
-            height: 5px;
-            background-color: var(--text-muted);
-            border-radius: 50%;
-            transition: background-color 0.3s var(--cb-fluid), box-shadow 0.3s var(--cb-fluid);
-        }
-
-        .link-card:hover .card-status::before {
-            background-color: var(--accent);
-            box-shadow: 0 0 8px var(--accent);
-        }
-
-        /* Pulsing Signal Loading State */
-        .card-status.loading-signal {
-            color: var(--warning-amber);
-        }
-
-        .card-status.loading-signal::before {
-            background-color: var(--warning-amber);
-            box-shadow: 0 0 8px var(--warning-amber);
-            animation: pulseSignal 1.2s infinite ease-in-out;
-        }
-
-        .link-card:hover .card-status.loading-signal {
-            color: #fbbf24;
-        }
-
-        .link-card:hover .card-status.loading-signal::before {
-            background-color: #fbbf24;
-            box-shadow: 0 0 10px #fbbf24;
-        }
-
-        .card-title {
-            font-size: 1.15rem;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            color: var(--text-main);
-        }
-
-        .card-desc {
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            line-height: 1.4;
-        }
-
-        /* Circular Action Node */
-        .card-action-node {
-            flex-shrink: 0;
-            width: 40px;
-            height: 40px;
-            background-color: #0d1321;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-muted);
-            font-size: 1rem;
-            transition: transform 0.4s var(--cb-fluid), color 0.4s var(--cb-fluid), box-shadow 0.4s var(--cb-fluid);
-        }
-
-        .link-card:hover .card-action-node {
-            color: var(--accent);
-            transform: scale(1.08);
-            box-shadow: 0 0 12px rgba(56, 189, 248, 0.35);
-        }
-
-        .card-action-node span {
-            transition: transform 0.4s var(--cb-fluid);
-        }
-
-        .link-card:hover .card-action-node span {
-            transform: translateX(2px);
-        }
-
-        /* Keyframe Animations */
-        @keyframes fluidEdge {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 150%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        @keyframes pulseSignal {
-            0%, 100% {
-                opacity: 0.3;
-                transform: scale(0.8);
-            }
-            50% {
-                opacity: 1;
-                transform: scale(1.3);
-            }
-        }
-
-        footer {
-            margin-top: 4rem;
-            text-align: center;
-            color: var(--text-muted);
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.7rem;
-            letter-spacing: 0.08em;
-            opacity: 0.7;
-        }
-    </style>
+    /* Glowing card edge gradient keyframe */
+    @keyframes fluidEdge {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 150%; }
+      100% { background-position: 0% 50%; }
+    }
+    .animate-fluid-edge {
+      background-size: 200% 200%;
+      animation: fluidEdge 10s linear infinite;
+    }
+  </style>
 </head>
-<body>
+<body class="bg-[#0d1321] text-slate-100 font-sans h-screen w-screen overflow-hidden selection:bg-sky-500 selection:text-black">
 
-    <!-- Background Matrix Code Stream Canvas -->
-    <canvas id="code-bg"></canvas>
+  <!-- Main Snap Scroll Container -->
+  <main class="h-screen w-full overflow-y-scroll snap-y snap-mandatory relative no-scrollbar" id="snap-container">
 
-    <div class="profile-wrapper">
-        <!-- Header Profile HUD -->
-        <header>
-            <div class="avatar-container">
-                <img src="IMG_3771.jpeg" alt="Gabriel Vasquez" class="avatar">
-            </div>
-            <span class="eyebrow">Gabriel Vasquez</span>
-            <h1>Selected Works</h1>
-            <p>Specialized projects, macro intelligence environments, and core development repositories.</p>
-        </header>
+    <!-- ================= SLIDE 0: HERO PROFILE ================= -->
+    <section class="h-screen w-full snap-center flex flex-col justify-between items-center relative overflow-hidden p-6">
+      <!-- Dynamic Canvas: Matrix Code Rain -->
+      <canvas id="canvas-matrix" class="absolute inset-0 w-full h-full pointer-events-none opacity-30 z-0"></canvas>
+      <div class="absolute w-[500px] h-[500px] bg-sky-500/15 rounded-full blur-[140px] pointer-events-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
 
-        <!-- Main Link Stack -->
-        <main class="link-stack">
-            <!-- Link Module 01 -->
-            <a href="https://matterr99.github.io/Tennis-portfolio/index.html" class="link-card" target="_blank">
-                <div class="card-main">
-                    <div class="card-meta">
-                        <span>[ 01 ]</span>
-                        <span class="card-status">LIVE MODULE</span>
-                    </div>
-                    <div class="card-title">Tennis Portfolio</div>
-                    <div class="card-desc">Player development methodologies and modern tennis training insights.</div>
-                </div>
-                <div class="card-action-node">
-                    <span>&rarr;</span>
-                </div>
-            </a>
+      <div><!-- Spacer for centering --></div>
 
-            <!-- Link Module 02 -->
-            <a href="https://matterr99.github.io/Macro-trading-hub/index.html" class="link-card" target="_blank">
-                <div class="card-main">
-                    <div class="card-meta">
-                        <span>[ 02 ]</span>
-                        <span class="card-status loading-signal">DEVELOPMENT IN PROGRESS</span>
-                    </div>
-                    <div class="card-title">Kairos Global Research</div>
-                    <div class="card-desc">Cross-asset liquidity tracking and institutional macro terminal.</div>
-                </div>
-                <div class="card-action-node">
-                    <span>&rarr;</span>
-                </div>
-            </a>
-
-            <!-- Link Module 03 -->
-            <a href="" class="link-card" target="_blank">
-                <div class="card-main">
-                    <div class="card-meta">
-                        <span>[ 03 ]</span>
-                        <span class="card-status loading-signal">UNDER DEVELOPMENT</span>
-                    </div>
-                    <div class="card-title">Web Development</div>
-                    <div class="card-desc">Showcase of clean UI/UX architectures, scripts, and web apps.</div>
-                </div>
-                <div class="card-action-node">
-                    <span>&rarr;</span>
-                </div>
-            </a>
-        </main>
-
-        <!-- Footer -->
-        <footer>
-            <p>&copy; 2026 // CORE SYSTEM ONLINE. OPERATING WITH PURPOSE.</p>
-        </footer>
-    </div>
-
-    <!-- Code Animation Script -->
-    <script>
-        const canvas = document.getElementById('code-bg');
-        const ctx = canvas.getContext('2d');
-
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        resizeCanvas();
-        window.addEventListener('resize', resizeCanvas);
-
-        // Technical syntax characters & code glyphs
-        const charSet = '01{}[]<>/;:=+*$&%_#@?!ABCDEFGHJKLMNPQRSTUVWXYZ';
-        const characters = charSet.split('');
+      <!-- Hero Card Container with Rounded Edges -->
+      <div class="relative z-10 max-w-md w-full p-8 sm:p-10 rounded-3xl backdrop-blur-xl bg-[#141c2f]/80 border border-sky-500/20 text-center shadow-[0_10px_35px_rgba(0,0,0,0.5)] flex flex-col items-center justify-center hover:border-sky-400/40 transition-all duration-300">
         
-        const fontSize = 14;
-        let columns = Math.floor(canvas.width / fontSize);
-        let drops = Array(columns).fill(1);
+        <!-- Profile Avatar -->
+        <div class="relative w-28 h-28 mb-6 group cursor-pointer flex-shrink-0">
+          <div class="absolute inset-0 rounded-full bg-sky-400/30 blur-xl group-hover:bg-sky-400/50 transition-all"></div>
+          <div class="relative w-28 h-28 rounded-full p-[2px] bg-gradient-to-tr from-sky-400 via-sky-500/20 to-sky-400 animate-fluid-edge shadow-2xl overflow-hidden">
+            <img src="IMG_3771.jpeg" alt="Gabriel Vasquez" class="w-full h-full rounded-full object-cover bg-slate-900" onError="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&auto=format&fit=crop&q=80'" />
+          </div>
+        </div>
+        
+        <span class="font-mono text-xs uppercase tracking-[0.3em] text-sky-400 font-bold block mb-2 text-center drop-shadow-[0_0_10px_rgba(56,189,248,0.5)]">Gabriel Vasquez</span>
+        <h1 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-3 text-center leading-tight">Selected Works</h1>
+        <p class="text-slate-400 text-sm leading-relaxed max-w-xs text-center mx-auto">
+          Specialized projects, macro intelligence environments, and core development repositories.
+        </p>
+      </div>
 
-        function drawCodeRain() {
-            const currentColumns = Math.floor(canvas.width / fontSize);
-            if (drops.length !== currentColumns) {
-                drops = Array(currentColumns).fill(1);
-            }
+      <!-- Bottom Scroll Indicator -->
+      <div class="z-10 pb-6 flex flex-col items-center justify-center gap-1.5 text-slate-400 animate-bounce cursor-pointer" onclick="scrollToNextSlide(1)">
+        <span class="font-mono text-[10px] tracking-widest uppercase text-sky-400/80 text-center">Explore Projects</span>
+        <i data-lucide="chevron-down" class="w-5 h-5 text-sky-400"></i>
+      </div>
+    </section>
 
-            // Dark semi-transparent layer creates smooth character fading trails
-            ctx.fillStyle = 'rgba(13, 19, 33, 0.12)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
+    <!-- ================= SLIDE 1: TENNIS PORTFOLIO ================= -->
+    <section class="h-screen w-full snap-center flex flex-col justify-between items-center relative overflow-hidden p-6">
+      <!-- Dynamic Canvas: Interactive Tennis Court & Trajectory Particles -->
+      <canvas id="canvas-tennis" class="absolute inset-0 w-full h-full pointer-events-none opacity-40 z-0"></canvas>
+      <div class="absolute w-[500px] h-[500px] bg-lime-500/10 rounded-full blur-[140px] pointer-events-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
 
-            ctx.fillStyle = '#38bdf8'; // Matches --accent cyan color
-            ctx.font = `${fontSize}px 'JetBrains Mono', monospace`;
+      <div><!-- Spacer --></div>
 
-            for (let i = 0; i < drops.length; i++) {
-                const text = characters[Math.floor(Math.random() * characters.length)];
-                
-                // Draw falling glyph
-                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+      <!-- Content Card -->
+      <div class="relative z-10 max-w-md w-full p-8 rounded-3xl backdrop-blur-xl bg-[#141c2f]/80 border border-sky-500/20 text-left shadow-[0_10px_35px_rgba(0,0,0,0.5)] hover:border-sky-400/50 transition-all duration-300">
+        <div class="flex items-center justify-between mb-4">
+          <span class="font-mono text-xs font-semibold text-slate-400 tracking-wider">[ 01 ]</span>
+          <span class="font-mono text-[11px] font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 px-2.5 py-1 rounded-full flex items-center gap-1.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+            LIVE MODULE
+          </span>
+        </div>
 
-                // Random reset after character reaches screen bottom
-                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-                    drops[i] = 0;
-                }
-                drops[i]++;
-            }
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-white mb-2 leading-tight">Tennis Portfolio</h2>
+        <p class="text-slate-400 text-sm mb-8 leading-relaxed">Player development methodologies and modern tennis training insights.</p>
+        
+        <a href="https://matterr99.github.io/Tennis-portfolio/index.html" target="_blank" class="w-full py-3.5 px-6 rounded-xl font-semibold text-white bg-slate-900 border border-sky-500/30 hover:bg-sky-500 hover:border-sky-400 transition-all flex items-center justify-between group shadow-lg">
+          <span>Open Tennis Terminal</span>
+          <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+        </a>
+      </div>
+
+      <!-- Bottom Scroll Indicator -->
+      <div class="z-10 pb-6 flex flex-col items-center justify-center gap-1.5 text-slate-400 animate-bounce cursor-pointer" onclick="scrollToNextSlide(2)">
+        <span class="font-mono text-[10px] tracking-widest uppercase text-slate-400 text-center">Next Project</span>
+        <i data-lucide="chevron-down" class="w-5 h-5 text-sky-400"></i>
+      </div>
+    </section>
+
+    <!-- ================= SLIDE 2: KAIROS GLOBAL RESEARCH ================= -->
+    <section class="h-screen w-full snap-center flex flex-col justify-between items-center relative overflow-hidden p-6">
+      <!-- Dynamic Canvas: Macro Financial Liquidity Waves -->
+      <canvas id="canvas-macro" class="absolute inset-0 w-full h-full pointer-events-none opacity-35 z-0"></canvas>
+      <div class="absolute w-[500px] h-[500px] bg-amber-500/10 rounded-full blur-[140px] pointer-events-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
+
+      <div><!-- Spacer --></div>
+
+      <!-- Content Card -->
+      <div class="relative z-10 max-w-md w-full p-8 rounded-3xl backdrop-blur-xl bg-[#141c2f]/80 border border-amber-500/20 text-left shadow-[0_10px_35px_rgba(0,0,0,0.5)] hover:border-amber-400/50 transition-all duration-300">
+        <div class="flex items-center justify-between mb-4">
+          <span class="font-mono text-xs font-semibold text-slate-400 tracking-wider">[ 02 ]</span>
+          <span class="font-mono text-[11px] font-bold text-amber-400 bg-amber-500/10 border border-amber-500/30 px-2.5 py-1 rounded-full flex items-center gap-1.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
+            DEVELOPMENT IN PROGRESS
+          </span>
+        </div>
+
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-white mb-2 leading-tight">Kairos Global Research</h2>
+        <p class="text-slate-400 text-sm mb-8 leading-relaxed">Cross-asset liquidity tracking and institutional macro terminal.</p>
+
+        <a href="https://matterr99.github.io/Macro-trading-hub/index.html" target="_blank" class="w-full py-3.5 px-6 rounded-xl font-semibold text-white bg-slate-900 border border-amber-500/30 hover:bg-amber-500 hover:border-amber-400 transition-all flex items-center justify-between group shadow-lg">
+          <span>Access Terminal</span>
+          <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+        </a>
+      </div>
+
+      <!-- Bottom Scroll Indicator -->
+      <div class="z-10 pb-6 flex flex-col items-center justify-center gap-1.5 text-slate-400 animate-bounce cursor-pointer" onclick="scrollToNextSlide(3)">
+        <span class="font-mono text-[10px] tracking-widest uppercase text-slate-400 text-center">Next Project</span>
+        <i data-lucide="chevron-down" class="w-5 h-5 text-amber-400"></i>
+      </div>
+    </section>
+
+    <!-- ================= SLIDE 3: WEB DEVELOPMENT ================= -->
+    <section class="h-screen w-full snap-center flex flex-col justify-between items-center relative overflow-hidden p-6">
+      <!-- Dynamic Canvas: Constellation Code Node Mesh -->
+      <canvas id="canvas-webdev" class="absolute inset-0 w-full h-full pointer-events-none opacity-40 z-0"></canvas>
+      <div class="absolute w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[140px] pointer-events-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
+
+      <div><!-- Spacer --></div>
+
+      <!-- Content Card -->
+      <div class="relative z-10 max-w-md w-full p-8 rounded-3xl backdrop-blur-xl bg-[#141c2f]/80 border border-cyan-500/20 text-left shadow-[0_10px_35px_rgba(0,0,0,0.5)] hover:border-cyan-400/50 transition-all duration-300">
+        <div class="flex items-center justify-between mb-4">
+          <span class="font-mono text-xs font-semibold text-slate-400 tracking-wider">[ 03 ]</span>
+          <span class="font-mono text-[11px] font-bold text-cyan-400 bg-cyan-500/10 border border-cyan-500/30 px-2.5 py-1 rounded-full flex items-center gap-1.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span>
+            UNDER DEVELOPMENT
+          </span>
+        </div>
+
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-white mb-2 leading-tight">Web Development</h2>
+        <p class="text-slate-400 text-sm mb-8 leading-relaxed">Showcase of clean UI/UX architectures, scripts, and web apps.</p>
+
+        <a href="#" class="w-full py-3.5 px-6 rounded-xl font-semibold text-white bg-slate-900 border border-cyan-500/30 hover:bg-cyan-500 hover:border-cyan-400 transition-all flex items-center justify-between group shadow-lg">
+          <span>Explore Architecture</span>
+          <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+        </a>
+      </div>
+
+      <!-- LAST SLIDE / RETURN TO TOP INDICATOR -->
+      <div class="z-10 pb-6 flex flex-col items-center justify-center gap-2 cursor-pointer group" onclick="scrollToNextSlide(0)">
+        <div class="flex items-center gap-2 px-4 py-2 rounded-full bg-[#141c2f]/90 border border-sky-500/30 backdrop-blur-md group-hover:bg-sky-500/20 transition-all shadow-lg">
+          <i data-lucide="check-circle-2" class="w-4 h-4 text-sky-400"></i>
+          <span class="font-mono text-xs font-bold text-slate-200">Last Slide • Tap to Return Top</span>
+          <i data-lucide="arrow-up" class="w-3.5 h-3.5 text-sky-400"></i>
+        </div>
+        <span class="font-mono text-[10px] text-slate-500 tracking-widest uppercase text-center">&copy; 2026 // CORE SYSTEM ONLINE</span>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Interactive Scripts -->
+  <script>
+    lucide.createIcons();
+
+    function scrollToNextSlide(index) {
+      const container = document.getElementById('snap-container');
+      container.scrollTo({
+        top: index * window.innerHeight,
+        behavior: 'smooth'
+      });
+    }
+
+    /* ================= CANVAS 0: MATRIX CODE RAIN ================= */
+    (function initMatrix() {
+      const canvas = document.getElementById('canvas-matrix');
+      const ctx = canvas.getContext('2d');
+      function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+      resize(); window.addEventListener('resize', resize);
+
+      const chars = '01{}[]<>/;:=+*$%_#@?!ABCDEFGHJKLMNPQRSTUVWXYZ'.split('');
+      const fontSize = 14;
+      let cols = Math.floor(canvas.width / fontSize);
+      let drops = Array(cols).fill(1);
+
+      function draw() {
+        ctx.fillStyle = 'rgba(13, 19, 33, 0.12)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = '#38bdf8';
+        ctx.font = `${fontSize}px 'JetBrains Mono', monospace`;
+
+        for (let i = 0; i < drops.length; i++) {
+          const txt = chars[Math.floor(Math.random() * chars.length)];
+          ctx.fillText(txt, i * fontSize, drops[i] * fontSize);
+          if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+          drops[i]++;
         }
+      }
+      setInterval(draw, 33);
+    })();
 
-        // Run animation loop (~30 fps)
-        setInterval(drawCodeRain, 33);
-    </script>
+    /* ================= CANVAS 1: TENNIS TRAJECTORY PARTICLES ================= */
+    (function initTennis() {
+      const canvas = document.getElementById('canvas-tennis');
+      const ctx = canvas.getContext('2d');
+      function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+      resize(); window.addEventListener('resize', resize);
+
+      let balls = Array.from({ length: 18 }, () => ({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 3,
+        vy: (Math.random() - 0.5) * 3,
+        radius: Math.random() * 3 + 2
+      }));
+
+      function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        ctx.strokeStyle = 'rgba(163, 230, 53, 0.1)';
+        ctx.lineWidth = 1;
+        ctx.strokeRect(canvas.width * 0.15, canvas.height * 0.15, canvas.width * 0.7, canvas.height * 0.7);
+        ctx.beginPath();
+        ctx.moveTo(canvas.width / 2, canvas.height * 0.15);
+        ctx.lineTo(canvas.width / 2, canvas.height * 0.85);
+        ctx.stroke();
+
+        balls.forEach(b => {
+          b.x += b.vx; b.y += b.vy;
+          if (b.x < 0 || b.x > canvas.width) b.vx *= -1;
+          if (b.y < 0 || b.y > canvas.height) b.vy *= -1;
+
+          ctx.beginPath();
+          ctx.arc(b.x, b.y, b.radius, 0, Math.PI * 2);
+          ctx.fillStyle = '#a3e635';
+          ctx.shadowBlur = 10;
+          ctx.shadowColor = '#a3e635';
+          ctx.fill();
+          ctx.shadowBlur = 0;
+        });
+        requestAnimationFrame(draw);
+      }
+      draw();
+    })();
+
+    /* ================= CANVAS 2: MACRO FINANCIAL WAVE ================= */
+    (function initMacro() {
+      const canvas = document.getElementById('canvas-macro');
+      const ctx = canvas.getContext('2d');
+      function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+      resize(); window.addEventListener('resize', resize);
+
+      let step = 0;
+      function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.beginPath();
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = '#f59e0b';
+        ctx.shadowBlur = 12;
+        ctx.shadowColor = '#f59e0b';
+
+        for (let x = 0; x < canvas.width; x += 5) {
+          const y = canvas.height / 2 + 
+                    Math.sin((x + step) * 0.01) * 40 + 
+                    Math.cos((x + step * 0.5) * 0.02) * 20;
+          if (x === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+        ctx.shadowBlur = 0;
+        step += 2;
+        requestAnimationFrame(draw);
+      }
+      draw();
+    })();
+
+    /* ================= CANVAS 3: WEB DEV CONSTELLATION MESH ================= */
+    (function initWebDev() {
+      const canvas = document.getElementById('canvas-webdev');
+      const ctx = canvas.getContext('2d');
+      function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+      resize(); window.addEventListener('resize', resize);
+
+      let nodes = Array.from({ length: 30 }, () => ({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 1.5,
+        vy: (Math.random() - 0.5) * 1.5
+      }));
+
+      function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        nodes.forEach((n, i) => {
+          n.x += n.vx; n.y += n.vy;
+          if (n.x < 0 || n.x > canvas.width) n.vx *= -1;
+          if (n.y < 0 || n.y > canvas.height) n.vy *= -1;
+
+          for (let j = i + 1; j < nodes.length; j++) {
+            const n2 = nodes[j];
+            const dist = Math.hypot(n.x - n2.x, n.y - n2.y);
+            if (dist < 120) {
+              ctx.beginPath();
+              ctx.moveTo(n.x, n.y);
+              ctx.lineTo(n2.x, n2.y);
+              ctx.strokeStyle = `rgba(56, 189, 248, ${1 - dist / 120})`;
+              ctx.lineWidth = 0.8;
+              ctx.stroke();
+            }
+          }
+
+          ctx.beginPath();
+          ctx.arc(n.x, n.y, 2, 0, Math.PI * 2);
+          ctx.fillStyle = '#06b6d4';
+          ctx.fill();
+        });
+        requestAnimationFrame(draw);
+      }
+      draw();
+    })();
+  </script>
 </body>
 </html>
